@@ -6,8 +6,12 @@ services:
     ports:
       - "8001:5000"
     image: jor2/hello-world-kubernetes_frontend
+    labels: 
+      kompose.service.type: NodePort
   backend:
     build: backend
     ports:
       - "8002:5000"
     image: jor2/hello-world-kubernetes_backend
+    labels:
+      kompose.service.type: NodePort
