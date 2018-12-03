@@ -5,7 +5,9 @@ services:
     build: frontend
     ports:
       - "8001:5000"
+    image: jor2/hello-world-kubernetes_frontend
   backend:
     build: backend
     ports:
       - "8002:5000"
+    image: jor2/hello-world-kubernetes_backend

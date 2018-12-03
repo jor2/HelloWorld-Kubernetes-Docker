@@ -8,7 +8,10 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     url = "http://backend:5000/"
-    res = requests.get(url)
+    try:
+        res = requests.get(url)
+    except ConnectionError:
+        return "Error with {}".format(url)
     dictFromServer = res.json()
     return dictFromServer['message']
 
