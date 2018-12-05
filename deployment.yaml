@@ -1,0 +1,75 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: backend
+          image: "jor2/hello-world-kubernetes_backend"
+          ports:
+            - name: http
+              containerPort: 5000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: frontend
+    tier: frontend
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: frontend
+          image: "jor2/hello-world-kubernetes_frontend"
+          ports:
+            - name: http
+              containerPort: 5000
