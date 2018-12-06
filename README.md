@@ -9,6 +9,10 @@ http://localhost:8002/
 
 http://127.0.0.1:8001/
 
-Kubernetes
+Kompose(kubernetes)
 =========================
 kompose up
+
+Kubernetes(the correct way)
+=========================
+kubectl create -f deployment.yaml
